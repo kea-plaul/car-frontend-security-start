@@ -1,8 +1,8 @@
 import { renderTemplate, setActive, showPage } from "./utils.js"
 import { setupLoginHandlers, logout, updateLoginDependentComponents } from "./js-for-pages/login.js"
-
-
-
+import { getAllCars } from "./js-for-pages/seeOurCars.js"
+import { setupAddCarHandlers } from "./js-for-pages/addEditCars.js"
+import { loadMyDetails } from "./js-for-pages/myDetails.js"
 
 
 function renderMenuItems(evt) {
@@ -11,11 +11,16 @@ function renderMenuItems(evt) {
   const id = element.id;
   renderTemplate(id)  //This setups the HTML for the page
   switch (id) {
-    //Here you can execute JavaScript for the selected page
-    // case "page-1": {
-    //   break
-    // }
     case "page-see-cars": {
+      getAllCars()
+      break
+    }
+    case "page-add-cars": {
+      setupAddCarHandlers()
+      break
+    }
+    case "page-my-details": {
+      loadMyDetails()
       break
     }
     case "page-login": {

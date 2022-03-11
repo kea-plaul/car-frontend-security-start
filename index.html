@@ -25,9 +25,11 @@
       <ul id="menu" class="menu">
         <li><a id="page-about" href="#">About</a></li>
         <li><a id="page-see-cars" href="#">See our cars</a></li>
+
         <div id="logged-in-admin" style="display: none;">
           <li><a id="page-add-cars" href="#">Add/edit cars</a></li>
         </div>
+
         <div id="not-logged-in" style="display: block;">
           <li><a id="page-sign-up" href="#">Sign up as user</a></li>
         </div>
@@ -53,36 +55,68 @@
   <h2>About Cars 'R' Us </h2>
   <img src="images/logo.PNG" alt="cars logo" />
 </template>
+
 <template data-id="page-see-cars">
   <h2>See our cars </h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Price pr day</th>
+      </tr>
+    </thead>
+    <tbody id="all-cars"></tbody>
+  </table>
 </template>
+
 <template data-id="page-add-cars">
   <h2>Add/Edit Cars </h2>
   <h3>ONLY FOR ADMINS</h3>
+
+  <form>
+    <p id="car-id"></p>
+    <input id="input-brand" placeholder="Add brand" />
+    <input id="input-model" placeholder="Add Model" />
+    <input type="number" id="input-price" placeholder="Add price pr day" />
+    <input type="number" id="input-discount" placeholder="Add Best Discount" />
+    <button id="btn-add-car">Add Car</button>
+  </form>
+  <p id="car-info-all"></p>
 </template>
+
 <template data-id="page-sign-up">
   <h2>Sign up as user with Car's 'R' Us</h2>
   <p>Here you should be abble to signup as a new user</p>
 </template>
+
+
 <template data-id="page-my-details">
   <h2>My Details</h2>
-  <p>Here you should see name, address etc. for the loged in member</p>
+  <p id="detail-username"></p>
+  <p id="detail-email"></p>
+  <p id="detail-firstname"></p>
+  <p id="detail-lastname"></p>
+  <p id="detail-street"></p>
+  <p id="detail-city"></p>
+  <p id="detail-zip"></p>
+  <p></p>
+</template>
+<template data-id="page-logout">
+
 </template>
 <template data-id="page-login">
   <div style="margin:150px;">
-    <p style="font-style: italic;">Right now you can only perform a DUMMY Login (no server involved),
-      either as a USER or as an ADMIN. This, just to see how the UI reflects your logged-in status (Anonymous, USER or
-      ADMIN
-    </p>
+
     <h2>Login</h2>
     <form>
       <input placeholder="User Name" id="username" />
-      <input placeholder="Password" id="password" />
+      <input type="password" placeholder="Password" id="password" />
       <div style="margin-top:1em;">
-        <button id="btn-login" class="btn btn-primary">Login (dummy login as USER)</button>
-        <br /><br />
-        <button id="btn-login2" class="btn btn-primary">Login (dummy login as ADMIN)</button>
+        <button id="btn-login" class="btn btn-primary">Login</button>
       </div>
     </form>
+    <p id="login-err" style="color:red;"></p>
   </div>
 </template>

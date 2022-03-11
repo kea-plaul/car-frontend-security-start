@@ -1,23 +1,40 @@
 import { showPage } from "../utils.js"
+import { makeOptions } from "../fetchUtils.js"
+import { SERVER } from "../settings.js"
+const URL = SERVER + "/auth/login"
+
 
 export function setupLoginHandlers() {
   document.getElementById("btn-login").onclick = login
-  //Remove after initial demo
-  document.getElementById("btn-login2").onclick = dummyLoginAdmin
+
 }
+
 
 function login() {
-  //Here you have to do the REAL LOGIN upgainst the backend
-  const token = "this simultas the token you wil get from a real login"
-  setLoginState(token, "USER")
-  showPage("page-about")
 
-}
-function dummyLoginAdmin() {
-  //We will remove this when we start to connect to the backend
-  const token = "this simultas the token you wil get from a real login"
-  setLoginState(token, "ADMIN")
-  showPage("page-about")
+  const user = {}
+  user.userName = document.getElementById("username").value
+  user.password = document.getElementById("password").value
+
+  fetch(URL, makeOptions("POST", user))
+    .then(res => {
+      if (!res.ok) {
+        if (res.status == 401) {
+          return Promise.reject("Wrong user name or password")
+        }
+      }
+      return res.json()
+    })
+    .then(response => {
+      const token = response.token
+      const role = response.roles[0];
+      setLoginState(token, role)
+      showPage("page-about")
+    })
+    .catch(e => {
+      document.getElementById("login-err").innerText = e;
+    })
+
 }
 
 export function logout() {
